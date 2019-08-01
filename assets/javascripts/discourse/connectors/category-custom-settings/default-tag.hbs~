@@ -1,0 +1,7 @@
+<h3>Topic Default Tag</h3>
+<section class='field'>
+  <label>
+    {{input type="text" checked=category.custom_fields.rating_enabled}}
+    {{i18n topic_default_tag.default_tag}}
+  </label>
+</section>

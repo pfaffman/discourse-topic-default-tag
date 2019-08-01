@@ -1,0 +1,49 @@
+# name: TopicDefaultTag
+# about:
+# version: 0.1
+# authors: pfaffman
+# url: https://github.com/pfaffman
+
+
+register_asset "stylesheets/common/topic-default-tag.scss"
+
+
+enabled_site_setting :topic_default_tag_enabled
+
+PLUGIN_NAME ||= "TopicDefaultTag".freeze
+
+after_initialize do
+  
+  # see lib/plugin/instance.rb for the methods available in this context
+  
+
+  module ::TopicDefaultTag
+    class Engine < ::Rails::Engine
+      engine_name PLUGIN_NAME
+      isolate_namespace TopicDefaultTag
+    end
+  end
+
+  
+
+  
+  require_dependency "application_controller"
+  class TopicDefaultTag::ActionsController < ::ApplicationController
+    requires_plugin PLUGIN_NAME
+
+    before_action :ensure_logged_in
+
+    def list
+      render json: success_json
+    end
+  end
+
+  TopicDefaultTag::Engine.routes.draw do
+    get "/list" => "actions#list"
+  end
+
+  Discourse::Application.routes.append do
+    mount ::TopicDefaultTag::Engine, at: "/topic-default-tag"
+  end
+  
+end

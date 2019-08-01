@@ -1,0 +1,4 @@
+plugins:
+  topic_default_tag_enabled:
+    default: true
+    client: true
