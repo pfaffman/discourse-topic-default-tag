@@ -1,13 +1,7 @@
 <h3>{{i18n 'topic_default_tag.title'}}</h3>
 <section class='field default-tag'>
   <div class="default-tag">
-  <label>
-       {{input type="list" value=category.custom_fields.default_tag }}
-    {{popup-input-tip validation=tagValidation}}
-    {{i18n 'topic_default_tag.default_tag'}}
-    {{log category.custom_fields.default_tag }}
-    {{log category.id }}
-
-  </label>
+  <label>{{i18n 'topic_default_tag.default_tag'}}</label>
+    {{input type="list" value=category.custom_fields.default_tag }}
   </div>
 </section>
