@@ -13,7 +13,7 @@ PLUGIN_NAME ||= "TopicDefaultTag".freeze
 
 after_initialize do
   # see lib/plugin/instance.rb for the methods available in this context
-  Category.register_custom_field_type('default_tag', :list)
+  Category.register_custom_field_type('default_tags', :list)
 
   module ::TopicDefaultTag
     class Engine < ::Rails::Engine
@@ -23,6 +23,23 @@ after_initialize do
   end
 
   require_dependency "application_controller"
+  class ::ApplicationController
+  end
+  require 'categories_controller'
+
+  class ::CategoriesController
+    before_action :default_tag_to_string, only: [:create, :update]
+
+    def default_tag_to_string
+      puts "CDT: #{params}"
+
+      return unless :topic_default_tag_enabled
+      #Just check whether the field exists to avoid running into errors
+      request.params["custom_fields"]["default_tag"] = request.params["custom_fields"]["default_tag"].join('|')
+    end
+
+  end
+
   class TopicDefaultTag::ActionsController < ::ApplicationController
     requires_plugin PLUGIN_NAME
 
@@ -41,12 +58,13 @@ after_initialize do
     mount ::TopicDefaultTag::Engine, at: "/topic-default-tag"
   end
 
-  Site.preloaded_category_custom_fields << 'default_tag' if Site.respond_to? :preloaded_category_custom_fields
-  add_to_serializer(:basic_category, :default_tag) { object.custom_fields["default_tag"] }
+  Site.preloaded_category_custom_fields << 'default_tags' if Site.respond_to? :preloaded_category_custom_fields
+  add_to_serializer(:basic_category, :default_tags) { object.custom_fields["default_tags"] }
+
 
   class ::Topic
-    def has_default_tag?
-      :topic_default_tag_enabled && self.category && self.category.custom_fields["default_tag"]
+    def has_default_tags?
+      :topic_default_tag_enabled && self.category && self.category.custom_fields["default_tags"]
     end
 
     def topic_tag_default_tags
@@ -54,7 +72,7 @@ after_initialize do
 
       tags = []
       if :topic_default_tag_enabled && self.category
-        self.category.custom_fields["default_tag"].split("|").each do |tag_name|
+        self.category.custom_fields["default_tags"].split("|").each do |tag_name|
           tags << Tag.find_by_name(tag_name)
         end
       end
@@ -69,9 +87,12 @@ after_initialize do
   end
 
   class ::Category
-    before_update do
+    before_commit do
       puts "WTF: #{self.custom_fields}"
-      self.custom_fields['default_tag'] = self.custom_fields['default_tag'].join('|')
+      # if self.custom_fields['default_tags']
+      #   self.custom_fields['default_tags'] = self.custom_fields['default_tags'].join('|')
+      # end
+      # self.custom_fields['default_tags'] += "|WTFINDEED"
     end
   end
 

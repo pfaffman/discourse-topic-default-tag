@@ -1,5 +1,5 @@
 en:
   js:
     topic_default_tag:
-      title: "Nice title name"
-      default_tag: "List of Default tags for this category"
+      title: "Default Tag"
+      default_tags: "List of Default tags for topics created in this category"

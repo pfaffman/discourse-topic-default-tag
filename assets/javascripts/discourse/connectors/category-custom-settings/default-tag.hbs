@@ -1,7 +1,7 @@
 <h3>{{i18n 'topic_default_tag.title'}}</h3>
 <section class='field default-tag'>
   <div class="default-tag">
-  <label>{{i18n 'topic_default_tag.default_tag'}}</label>
-    {{input type="list" value=category.custom_fields.default_tag }}
+  <label>{{i18n 'topic_default_tag.default_tags'}}</label>
+  {{tag-chooser tags=category.custom_fields.default_tag tabindex="4" categoryId=category.id}}
   </div>
 </section>
