@@ -30,12 +30,14 @@ after_initialize do
   class ::CategoriesController
     before_action :default_tag_to_string, only: [:create, :update]
 
+    # converts the Ember array into the string that Rails needs
     def default_tag_to_string
       puts "CDT: #{params}"
 
       return unless :topic_default_tag_enabled
       #Just check whether the field exists to avoid running into errors
-      request.params["custom_fields"]["default_tag"] = request.params["custom_fields"]["default_tag"].join('|')
+      if request.params["custom_fields"]["default_tags"].is_a?(Array)
+        request.params["custom_fields"]["default_tags"] = request.params["custom_fields"]["default_tags"].join('|')end
     end
 
   end
@@ -71,7 +73,7 @@ after_initialize do
       puts "Gonna do some tags from #{self.category.custom_fields}!"
 
       tags = []
-      if :topic_default_tag_enabled && self.category
+      if :topic_default_tag_enabled && self.category && self.category.custom_fields["default_tags"]
         self.category.custom_fields["default_tags"].split("|").each do |tag_name|
           tags << Tag.find_by_name(tag_name)
         end
