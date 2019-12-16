@@ -32,14 +32,12 @@ after_initialize do
 
     # converts the Ember array into the string that Rails needs
     def default_tag_to_string
-      puts "CDT: #{params}"
-
       return unless :topic_default_tag_enabled
       #Just check whether the field exists to avoid running into errors
       if request.params["custom_fields"]["default_tags"].is_a?(Array)
-        request.params["custom_fields"]["default_tags"] = request.params["custom_fields"]["default_tags"].join('|')end
+        request.params["custom_fields"]["default_tags"] = request.params["custom_fields"]["default_tags"].join('|')
+      end
     end
-
   end
 
   class TopicDefaultTag::ActionsController < ::ApplicationController
@@ -70,8 +68,6 @@ after_initialize do
     end
 
     def topic_tag_default_tags
-      puts "Gonna do some tags from #{self.category.custom_fields}!"
-
       tags = []
       if :topic_default_tag_enabled && self.category && self.category.custom_fields["default_tags"]
         self.category.custom_fields["default_tags"].split("|").each do |tag_name|
@@ -87,27 +83,4 @@ after_initialize do
       end
     end
   end
-
-  class ::Category
-    before_commit do
-      puts "WTF: #{self.custom_fields}"
-      # if self.custom_fields['default_tags']
-      #   self.custom_fields['default_tags'] = self.custom_fields['default_tags'].join('|')
-      # end
-      # self.custom_fields['default_tags'] += "|WTFINDEED"
-    end
-  end
-
-
-  # DiscourseEvent.on(:post_created) do |post, opts, user|
-  #   if post.post_number == 1
-  #     topic = Topic.find(post.topic_id)
-  #     # then add the tag
-  #     topic.topic_tag_default_tags.each do |tag|
-  #       TopicTag.create(topic_id: post.topic_id, tag_id: tag.id)
-  #     end
-  #   end
-  # end
-
-
 end
