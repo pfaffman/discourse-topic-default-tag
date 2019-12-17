@@ -1,9 +1,10 @@
+# frozen_string_literal: true
+
 # name: TopicDefaultTag
 # about:
 # version: 0.1
 # authors: pfaffman
 # url: https://github.com/pfaffman
-
 
 register_asset "stylesheets/common/topic-default-tag.scss"
 
@@ -60,7 +61,6 @@ after_initialize do
 
   Site.preloaded_category_custom_fields << 'default_tags' if Site.respond_to? :preloaded_category_custom_fields
   add_to_serializer(:basic_category, :default_tags) { object.custom_fields["default_tags"] }
-
 
   class ::Topic
     def has_default_tags?
