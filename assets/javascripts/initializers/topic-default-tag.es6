@@ -5,7 +5,7 @@ function initializeTopicDefaultTag(api) {
   // see app/assets/javascripts/discourse/lib/plugin-api
   // for the functions available via the api object
 
-  api.registerConnectorClass("category-custom-settings", "default-tag", {
+  api.registerConnectorClass("category-custom-settings", "default-tag", (
     setupComponent(args, component);
   )};
 
