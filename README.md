@@ -1,6 +1,6 @@
 # TopicDefaultTag
 
-TopicDefaultTag is a plugin for ...
+TopicDefaultTag is a plugin to have tags (even staff-only tags) automatically added to topics in a category.
 
 ## Installation
 
@@ -10,7 +10,9 @@ as the plugin command.
 
 ## Usage
 
+To use, add a default tag in the category settings.
+
 ## Feedback
 
 If you have issues or suggestions for the plugin, please bring them up on
-[Discourse Meta](https://meta.discourse.org).
+[support.literatecomputing.com](https://support.literatecomputing.com/t/discourse-topic-default-tag-plugin-notes/419).
