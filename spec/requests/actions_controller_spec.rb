@@ -1,12 +1,6 @@
 # frozen_string_literal: true
 require 'rails_helper'
 
-describe TopicDefaultTag::ActionsController do
-  before do
-    Jobs.run_immediately!
-  end
-end
-
 describe TopicCreator do
   fab!(:newuser)      { Fabricate(:user, trust_level: TrustLevel[0]) }
   fab!(:user)      { Fabricate(:user, trust_level: TrustLevel[2]) }
