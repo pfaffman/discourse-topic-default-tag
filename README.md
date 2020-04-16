@@ -5,7 +5,7 @@ TopicDefaultTag is a plugin to have tags (even staff-only tags) automatically ad
 ## Installation
 
 Follow [Install a Plugin](https://meta.discourse.org/t/install-a-plugin/19157)
-how-to from the official Discourse Meta, using `git clone https://github.com/pfaffman/topic-default-tag.git`
+how-to from the official Discourse Meta, using `git clone https://github.com/pfaffman/discourse-topic-default-tag.git`
 as the plugin command.
 
 ## Usage
