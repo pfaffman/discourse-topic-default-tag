@@ -79,7 +79,7 @@ after_initialize do
 
     after_create do
       self.topic_tag_default_tags.each do |tag|
-        TopicTag.create(topic_id: self.id, tag_id: tag.id)
+        TopicTag.find_or_create_by(topic_id: self.id, tag_id: tag.id)
       end
     end
   end
