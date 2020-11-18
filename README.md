@@ -1,6 +1,8 @@
 # TopicDefaultTag
 
-TopicDefaultTag is a plugin to have tags (even staff-only tags) automatically added to topics in a category.
+This plugin was broken by an upgrade to core on or about November 18, 2020. The client for whom it was developed no longer uses it. If you have need to use it and have a budget, please contact me. PRs will be considered and accepted as quickly as feasible. 
+
+TopicDefaultTag ~~is~~ was a plugin to have tags (even staff-only tags) automatically added to topics in a category.
 
 ## Installation
 
